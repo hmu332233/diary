@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import reactLogo from './assets/react.svg';
 import viteLogo from '/vite.svg';
+import { useAuth } from './contexts/AuthContext';
 
 function App() {
+  const { currentUser, signInWithGoogle, signOut } = useAuth();
   const [count, setCount] = useState(0);
 
   return (
@@ -15,9 +17,9 @@ function App() {
         </div>
 
         <p className="mt-3 text-xl text-center text-gray-600 ">Welcome back!</p>
-
-        <a
-          href="#"
+        {currentUser && <button onClick={signOut}>로그아웃</button>}
+        <div
+          onClick={signInWithGoogle}
           className="flex items-center justify-center mt-4 btn btn-ghost btn-outline"
         >
           <svg className="w-6 h-6" viewBox="0 0 40 40">
@@ -40,7 +42,7 @@ function App() {
           </svg>
 
           <span>Sign in with Google</span>
-        </a>
+        </div>
       </div>
     </div>
   );
