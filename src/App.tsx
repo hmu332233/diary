@@ -1,16 +1,26 @@
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Main from './pages/Main';
+import ProtectedRoute from './components/ProtectedRoute';
+import SignIn from './pages/SignIn';
 
-let router = createBrowserRouter([
+const router = createBrowserRouter([
   {
     path: '/',
-    element: <Outlet />, // TODO: Layout으로 변경
+    element: (
+      <ProtectedRoute>
+        <Outlet />
+      </ProtectedRoute>
+    ),
     children: [
       {
         index: true,
-        Component: Main,
+        element: <Main />,
       },
     ],
+  },
+  {
+    path: '/signin',
+    element: <SignIn />,
   },
 ]);
 
